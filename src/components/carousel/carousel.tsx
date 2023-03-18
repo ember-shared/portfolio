@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const transition = {
@@ -12,30 +12,37 @@ const transition = {
     },
 };
 
-const variants = {
-    initial: {
-        x: 800,
-        opacity: 0,
-    },
-    animate: {
-        x: 0,
-        opacity: 1,
-        transition,
-    },
-    exit: {
-        x: -800,
-        opacity: 0,
-        transition,
-    },
-};
-
 type TCarouselProps = {
     urls: string[];
     millisecondInterval: number;
+    animationX: number;
 };
 
-export const Carousel: FC<TCarouselProps> = ({ urls, millisecondInterval }) => {
+export const Carousel: FC<TCarouselProps> = ({
+    urls,
+    millisecondInterval,
+    animationX,
+}) => {
     const [currentImage, setCurrentImage] = useState<string>(urls[0]);
+
+    const variants: { [key: string]: {} } = useMemo(() => {
+        return {
+            initial: {
+                x: animationX,
+                opacity: 0,
+            },
+            animate: {
+                x: 0,
+                opacity: 1,
+                transition,
+            },
+            exit: {
+                x: -1 * animationX,
+                opacity: 0,
+                transition,
+            },
+        };
+    }, [animationX]);
 
     useEffect(() => {
         const slideInterval = setInterval(() => {
