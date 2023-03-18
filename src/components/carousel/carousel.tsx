@@ -32,14 +32,9 @@ const variants = {
 type TCarouselProps = {
     urls: string[];
     millisecondInterval: number;
-    minHeight?: string;
 };
 
-export const Carousel: FC<TCarouselProps> = ({
-    urls,
-    millisecondInterval,
-    minHeight,
-}) => {
+export const Carousel: FC<TCarouselProps> = ({ urls, millisecondInterval }) => {
     const [currentImage, setCurrentImage] = useState<string>(urls[0]);
 
     useEffect(() => {
@@ -54,11 +49,7 @@ export const Carousel: FC<TCarouselProps> = ({
     }, [urls, millisecondInterval, currentImage]);
 
     return (
-        <div
-            className={`relative w-full ${
-                minHeight ? minHeight : 'min-h-[50vh]'
-            } overflow-hidden`}
-        >
+        <div className={`relative w-full h-full overflow-hidden`}>
             <AnimatePresence>
                 <motion.img
                     key={currentImage}

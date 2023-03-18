@@ -9,10 +9,12 @@ export default function ComponentGallery() {
                 name='Carousel'
                 description='Custom image carousel.'
             >
-                <Carousel
-                    urls={Object.values(IMAGE_URL_DATA)}
-                    millisecondInterval={5000}
-                />
+                <div className='h-[25vh]'>
+                    <Carousel
+                        urls={Object.values(IMAGE_URL_DATA)}
+                        millisecondInterval={5000}
+                    />
+                </div>
             </GalleryItem>
             <hr />
         </div>
